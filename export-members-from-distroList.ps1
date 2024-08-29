@@ -19,9 +19,34 @@ function Get-Log {
     param (
         [string]$LogFilePath,
         [string]$LogMessage
-    )
+    )# Define the log file path
+$logFilePath = ".\log.txt"
+
+# Define the distribution group you want to export members from
+$distributionGroup = "YourDistributionGroup@domain.com"
+
+# Specify the path where the CSV file will be saved
+$csvPath = ".\DistributionGroupMembers.csv"
     # Create the log entry with the current date and time
     $logEntry = "{0} - {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $LogMessage
     # Append the log entry to the log file
     Add-Content -Path $LogFilePath -Value $logEntry
 }
+
+# Directly retrieve and export the members to a CSV file
+try {
+    Write-Host 'Script in-progress...'
+    Get-DistributionGroupMember -Identity $distributionGroup -ResultSize Unlimited |
+    Select-Object DisplayName,PrimarySmtpAddress |
+    Export-Csv -Path $csvPath -NoTypeInformation
+    
+    Get-Log -LogFilePath $logFilePath -LogMessage "Successfully exported members to $csvPath"
+    Write-Host "Members have been successfully exported to $csvPath" -ForegroundColor Green
+}
+catch {
+    Get-Log -LogFilePath $logFilePath -LogMessage "Failed to export members to $csvPath. Error: $_"
+    Write-Host "Failed to export members. See log for details." -ForegroundColor Red
+}
+
+# Disconnect from Exchange Online
+Disconnect-ExchangeOnline -Confirm:$false
