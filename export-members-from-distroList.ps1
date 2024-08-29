@@ -6,32 +6,34 @@ Desc: Ream more about this script from
 #>
 
 # Install Exchange Online module if not already
-Install-Module -Name ExchangeOnlineManagement -Force -AllowClobber
+#Install-Module -Name ExchangeOnlineManagement -Force -AllowClobber
 
 # Import Exchange Online Management module
 Import-Module ExchangeOnlineManagement
 
 # Connect to Exchange Online
-Connect-ExchangeOnline -UserPrincipalName 'enter your UPN'
+Connect-ExchangeOnline -UserPrincipalName 'upn'
 
 # Function to log messages
 function Get-Log {
     param (
         [string]$LogFilePath,
         [string]$LogMessage
-    )# Define the log file path
-$logFilePath = ".\log.txt"
-
-# Define the distribution group you want to export members from
-$distributionGroup = "YourDistributionGroup@domain.com"
-
-# Specify the path where the CSV file will be saved
-$csvPath = ".\DistributionGroupMembers.csv"
+    )
     # Create the log entry with the current date and time
     $logEntry = "{0} - {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $LogMessage
     # Append the log entry to the log file
     Add-Content -Path $LogFilePath -Value $logEntry
 }
+
+# Define the log file path
+$logFilePath = ".\log.txt"
+
+# Define the distribution group you want to export members from
+$distributionGroup = "enter dl name"
+
+# Specify the path where the CSV file will be saved
+$csvPath = ".\DistributionGroupMembers.csv"
 
 # Directly retrieve and export the members to a CSV file
 try {
