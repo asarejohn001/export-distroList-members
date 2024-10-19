@@ -9,8 +9,6 @@ The [script](export-members-from-distroList.ps1) will help engineers and adminis
 2. Uses the [Connect-ExchangeOnline](https://learn.microsoft.com/en-us/powershell/module/exchange/connect-exchangeonline?view=exchange-ps) method to connect to your exchange admin console (EAC).
 3. Uses the [Get-DistributionGroupMember](https://learn.microsoft.com/en-us/powershell/module/exchange/get-distributiongroupmember?view=exchange-ps) to export distribution group members. It will export the member's DisplayName and PrimarySmtpAddress into a CSV file.
 
-4. # Important
-5. > [!IMPORTANT]  
-> Crucial information necessary for users to succeed.
-6. > [! IMPORTANT]
-   > Please make sure to change the value of these variables to your environment: $logFilePath, $distributionGroup, and $csvPath
+# Important
+> [!IMPORTANT]
+> Please make sure to change the value of these variables to your environment: $logFilePath, $distributionGroup, and $csvPath.
