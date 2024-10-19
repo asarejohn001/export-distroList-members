@@ -2,7 +2,7 @@
 Name: John Asare
 Date: 08/29/2024
 
-Desc: Ream more about this script from 
+Desc: Ream more about this script from https://github.com/asarejohn001/export-distroList-members/edit/main/export-members-from-distroList.ps1
 #>
 
 # Install Exchange Online module if not already
